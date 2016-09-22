@@ -1,0 +1,23 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!--
+*@file_Name: employee.hbm.xml
+*@Author: Shwetali
+*@Date: 21-09-2016
+*@purpose:This mapping file contains all the information of the persistent class(Employee).
+-->
+
+<!DOCTYPE hibernate-mapping PUBLIC  
+"-//Hibernate/Hibernate Mapping DTD 3.0//EN"  
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+	<class name="com.bridgelabz.dto.Employee" table="SpHEmployee">
+		<id name="id">
+			<generator class="assigned"></generator>
+		</id>
+
+		<property name="name"></property>
+		<property name="salary"></property>
+	</class>
+
+</hibernate-mapping> 

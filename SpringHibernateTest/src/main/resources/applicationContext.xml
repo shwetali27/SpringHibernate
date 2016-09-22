@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+*@file_Name: applicationContext.xml
+*@Author: Shwetali
+*@Date: 21-09-2016
+*@purpose: xml file for database connection and bean objects.
+-->
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans  
+        http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+
+	<!-- Database Connection -->
+	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
+		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
+		<property name="url" value="jdbc:mysql://localhost:3306/employee" />
+		<property name="username" value="root" />
+		<property name="password" value="bridgeit" />
+	</bean>
+
+	<bean id="mysessionFactory"
+		class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
+		<property name="dataSource" ref="dataSource"></property>
+
+		<property name="mappingResources">
+			<list>
+				<value>employee.hbm.xml</value>
+			</list>
+		</property>
+
+		<!-- Automatic table creation inside Database -->
+		<property name="hibernateProperties">
+			<props>
+				<prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>
+				<prop key="hibernate.hbm2ddl.auto">update</prop>
+				<prop key="hibernate.show_sql">false</prop>
+
+			</props>
+		</property>
+	</bean>
+	
+	<!-- Creating object for EmployeeDao class -->
+	<bean id="employeeDao" class="com.bridgelabz.dao.EmployeeDao">
+		<property name="sessionFactory" ref="mysessionFactory"></property>
+	</bean>
+
+</beans>  
